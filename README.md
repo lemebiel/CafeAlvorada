@@ -2,7 +2,7 @@
   <img src="Public/logoalvorada.png" alt="Alvorada" width="200"/>
 </p>
 
-<h1 align="center">Nome do Projeto</h1>
+<h1 align="center">Café Alvorada</h1>
 
 ## 👨‍💻 Colaboradores
 
