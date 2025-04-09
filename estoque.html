@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Estoque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+    * {
+      font-family: "Instrument Sans", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: Roboto, sans-serif;
+      background-color: #F6F6F6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    nav {
+      width: 150px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      box-sizing: border-box;
+    }
+
+    nav .nav-item a {
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #7D7D7D;
+      transition: 0.2s ease;
+    }
+
+    nav .nav-item a:hover {
+      background-color: #454545;
+      color: #fff;
+    }
+
+    nav img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .nav-item img {
+      width: 27px;
+      height: 27px;
+    }
+
+    .nav-item span {
+      color: #7D7D7D;
+      font-size: 16px;
+      font-family: Instrument Sans;
+    }
+
+    .nav-item:nth-child(3) img,
+    .nav-item:nth-child(4) img,
+    .nav-item:nth-child(5) img {
+      width: 23px;
+      height: 23px;
+    }
+
+    main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .produtos-count {
+      background-color: #EAEAEA;
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #555;
+      margin-top: 5px;
+    }
+
+    .filtros {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filtros select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .filtros button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background-color: #9D6A5E;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .filtros button:hover {
+      background-color: #814d43;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f9f9f9;
+      color: #555;
+      font-weight: 500;
+    }
+
+    td {
+      color: #333;
+    }
+
+    .icone-mais {
+      color: #9D6A5E;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="Telainicial.html"><img src="Public/logoalvorada.png" alt="Logo Alvorada" /></a>
+    <div class="nav-item">
+      <img src="icons/pedidos.png" alt="Ícone Pedidos" />
+      <span><a href="pedidos.html">Pedidos</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/clientes.png" alt="Ícone Clientes" />
+      <span><a href="GestaoClientes.html">Clientes</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/estoque.png" alt="Ícone Estoque" />
+      <span><a href="estoque.html">Estoque</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/licenca.png" alt="Ícone Licenças" />
+      <span><a href="Licenciamento.html">Licenças</a></span>
+    </div>
+  </nav>
+
+  <main>
+    <div class="header">
+      <p>Olá, <strong>Gabriel Leme</strong></p>
+      <h1>← Controle de estoque</h1>
+      <p>Nesta área são relacionados os produtos em estoque.</p>
+      <div class="produtos-count">325 Produtos</div>
+    </div>
+
+    <div class="filtros">
+      <select>
+        <option>Produto</option>
+      </select>
+      <select>
+        <option>Código do Produto</option>
+      </select>
+      <button>Filtrar</button>
+      <!-- Botão para abrir o popup -->
+    <button onclick="document.getElementById('popup').style.display='flex'"
+    style="padding: 10px 20px; background-color: #9d6a5e; color: white; border: none; border-radius: 8px; cursor: pointer;">Cadastro de Produto
+</button>
+
+<!-- Overlay e Modal -->
+<div id="popup" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+   background-color: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 1000;">
+
+    <div style="width: 100%; max-width: 600px; background: white; border-radius: 12px; padding: 24px; box-sizing: border-box;
+     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); position: relative;">
+
+        <!-- Cabeçalho -->
+        <div style="margin-bottom: 16px;">
+            <button onclick="document.getElementById('popup').style.display='none'"
+                style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #667085;">×</button>
+            <h2 style="margin: 0; font-size: 20px; color: #344054;">Cadastro de produto</h2>
+            <p style="margin-top: 4px; font-size: 14px; color: #667085;">
+                Realize o cadastro de um novo produto que ainda não existe em estoque
+            </p>
+        </div>
+
+        <!-- Formulário -->
+        <input type="text" placeholder="Digite o nome do prodto" style="margin-bottom: 12px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <input type="text" placeholder="Digite a quantidade de entrada" style="margin-bottom: 12px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <input type="text" placeholder="Digite a unidade de medida" style="margin-bottom: 12px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <input type="text" placeholder="Digite o valor unitário do produto" style="margin-bottom: 12px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <input type="text" placeholder="Digite o valor unitário do produto" style="margin-bottom: 12px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <input type="text" placeholder="Limite mínimo em estoque para alerta" style="margin-bottom: 24px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <!-- Botão Salvar -->
+        <div style="text-align: right;">
+            <button style="padding: 10px 24px; background-color: #9d6a5e; color: white;
+      border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                Salvar
+            </button>
+        </div>
+
+    </div>
+</div>
+          <!-- Botão para abrir o popup -->
+    <button onclick="document.getElementById('saidaProdutoModal').style.display='flex'"
+    style=" padding: 10px 20px; background-color: #9d6a5e; color: white; border: none; border-radius: 8px; cursor: pointer;">
+   Saída de Produto
+</button>
+
+<!-- Popup Modal -->
+<div id="saidaProdutoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+   background-color: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 1000;">
+
+    <div style="width: 100%; max-width: 600px; background: white; border-radius: 12px; padding: 24px; box-sizing: border-box;
+     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); position: relative;">
+
+        <!-- Cabeçalho -->
+        <div style="margin-bottom: 16px;">
+            <button onclick="document.getElementById('saidaProdutoModal').style.display='none'"
+                style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #667085;">×</button>
+            <h2 style="margin: 0; font-size: 20px; color: #344054;">Saída de produto</h2>
+            <p style="margin-top: 4px; font-size: 14px; color: #667085;">
+                Selecione o produto que deseja realizar a saída
+            </p>
+        </div>
+
+        <!-- Select Produto -->
+        <select style="margin-bottom: 12px; width: 100%; padding: 10px 14px; border: 1px solid #d0d5dd; border-radius: 6px;
+    font-size: 14px; color: #667085; background-color: white; box-sizing: border-box;">
+            <option disabled selected>Selecione o produto</option>
+            <option>Produto 1</option>
+            <option>Produto 2</option>
+            <option>Produto 3</option>
+        </select>
+
+        <!-- Quantidade -->
+        <input type="text" placeholder="Digite a quantidade de saída" style="margin-bottom: 24px; width: 100%; padding: 10px 14px;
+    border: 1px solid #d0d5dd; border-radius: 6px; font-size: 14px; color: #667085; box-sizing: border-box;">
+
+        <!-- Botão Salvar -->
+        <div style="text-align: right;">
+            <button style="padding: 10px 24px; background-color: #9d6a5e; color: white;
+      border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                Salvar
+            </button>
+        </div>
+
+    </div>
+</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Unidade de medida</th>
+          <th>Valor unitário</th>
+          <th>Valor em estoque</th>
+          <th>Limite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><!-- Botão para abrir o popup -->
+            <button onclick="document.getElementById('popupEntrada').style.display='flex'"
+                style="padding: 5px 10px; background: #9D6A5E; font-weight: bolder; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                +
+            </button>
+        
+            <!-- Modal -->
+            <div id="popupEntrada"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+                <div
+                    style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+        
+                    <!-- Cabeçalho -->
+                    <div
+                        style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span onclick="document.getElementById('popupEntrada').style.display='none'"
+                                style="font-size: 18px; cursor: pointer;">←</span>
+                            <span style="font-size: 18px; font-weight: 600; color: #344054;">Entrada de produto</span>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 400; color: #667085;">Faça o lançamento de entrada do produto
+                            selecionado</span>
+                    </div>
+        
+                    <!-- Inputs -->
+                    <input type="number" placeholder="Digite a quantidade de entrada"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+                    <input type="number" placeholder="Digite o valor unitário do produto"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        
+                    <!-- Botão -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                        <button onclick="document.getElementById('popupEntrada').style.display='none'"
+                            style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div> Café espresso</td>
+          <td>25</td>
+          <td>Und</td>
+          <td>R$ 3,25</td>
+          <td>R$ 81,25</td>
+          <td>R$ 81,25</td>
+        </tr>
+        <tr>
+          <td><!-- Botão para abrir o popup -->
+            <button onclick="document.getElementById('popupEntrada').style.display='flex'"
+                style="padding: 5px 10px; background: #9D6A5E; font-weight: bolder; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                +
+            </button>
+        
+            <!-- Modal -->
+            <div id="popupEntrada"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+                <div
+                    style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+        
+                    <!-- Cabeçalho -->
+                    <div
+                        style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span onclick="document.getElementById('popupEntrada').style.display='none'"
+                                style="font-size: 18px; cursor: pointer;">←</span>
+                            <span style="font-size: 18px; font-weight: 600; color: #344054;">Entrada de produto</span>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 400; color: #667085;">Faça o lançamento de entrada do produto
+                            selecionado</span>
+                    </div>
+        
+                    <!-- Inputs -->
+                    <input type="number" placeholder="Digite a quantidade de entrada"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+                    <input type="number" placeholder="Digite o valor unitário do produto"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        
+                    <!-- Botão -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                        <button onclick="document.getElementById('popupEntrada').style.display='none'"
+                            style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div> Café coado</td>
+          <td>25</td>
+          <td>Und</td>
+          <td>R$ 3,25</td>
+          <td>R$ 81,25</td>
+          <td>R$ 81,25</td>
+        </tr>
+        <tr>
+          <td><!-- Botão para abrir o popup -->
+            <button onclick="document.getElementById('popupEntrada').style.display='flex'"
+                style="padding: 5px 10px; background: #9D6A5E; font-weight: bolder; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                +
+            </button>
+        
+            <!-- Modal -->
+            <div id="popupEntrada"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+                <div
+                    style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+        
+                    <!-- Cabeçalho -->
+                    <div
+                        style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span onclick="document.getElementById('popupEntrada').style.display='none'"
+                                style="font-size: 18px; cursor: pointer;">←</span>
+                            <span style="font-size: 18px; font-weight: 600; color: #344054;">Entrada de produto</span>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 400; color: #667085;">Faça o lançamento de entrada do produto
+                            selecionado</span>
+                    </div>
+        
+                    <!-- Inputs -->
+                    <input type="number" placeholder="Digite a quantidade de entrada"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+                    <input type="number" placeholder="Digite o valor unitário do produto"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        
+                    <!-- Botão -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                        <button onclick="document.getElementById('popupEntrada').style.display='none'"
+                            style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div> Cappuccino</td>
+          <td>25</td>
+          <td>Und</td>
+          <td>R$ 3,25</td>
+          <td>R$ 81,25</td>
+          <td>R$ 81,25</td>
+        </tr>
+        <tr>
+          <td><!-- Botão para abrir o popup -->
+            <button onclick="document.getElementById('popupEntrada').style.display='flex'"
+                style="padding: 5px 10px; background: #9D6A5E; font-weight: bolder; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                +
+            </button>
+        
+            <!-- Modal -->
+            <div id="popupEntrada"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+                <div
+                    style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+        
+                    <!-- Cabeçalho -->
+                    <div
+                        style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span onclick="document.getElementById('popupEntrada').style.display='none'"
+                                style="font-size: 18px; cursor: pointer;">←</span>
+                            <span style="font-size: 18px; font-weight: 600; color: #344054;">Entrada de produto</span>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 400; color: #667085;">Faça o lançamento de entrada do produto
+                            selecionado</span>
+                    </div>
+        
+                    <!-- Inputs -->
+                    <input type="number" placeholder="Digite a quantidade de entrada"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+                    <input type="number" placeholder="Digite o valor unitário do produto"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        
+                    <!-- Botão -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                        <button onclick="document.getElementById('popupEntrada').style.display='none'"
+                            style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div> Mocha</td>
+          <td>25</td>
+          <td>Und</td>
+          <td>R$ 3,25</td>
+          <td>R$ 81,25</td>
+          <td>R$ 81,25</td>
+        </tr>
+        <!-- Repetições conforme imagem -->
+        <tr>
+          <td><!-- Botão para abrir o popup -->
+            <button onclick="document.getElementById('popupEntrada').style.display='flex'"
+                style="padding: 5px 10px; background: #9D6A5E; font-weight: bolder; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                +
+            </button>
+        
+            <!-- Modal -->
+            <div id="popupEntrada"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+                <div
+                    style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+        
+                    <!-- Cabeçalho -->
+                    <div
+                        style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span onclick="document.getElementById('popupEntrada').style.display='none'"
+                                style="font-size: 18px; cursor: pointer;">←</span>
+                            <span style="font-size: 18px; font-weight: 600; color: #344054;">Entrada de produto</span>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 400; color: #667085;">Faça o lançamento de entrada do produto
+                            selecionado</span>
+                    </div>
+        
+                    <!-- Inputs -->
+                    <input type="number" placeholder="Digite a quantidade de entrada"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+                    <input type="number" placeholder="Digite o valor unitário do produto"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        
+                    <!-- Botão -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                        <button onclick="document.getElementById('popupEntrada').style.display='none'"
+                            style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div> Café espresso</td>
+          <td>25</td>
+          <td>Und</td>
+          <td>R$ 3,25</td>
+          <td>R$ 81,25</td>
+          <td>R$ 81,25</td>
+        </tr>
+        <tr>
+          <td><!-- Botão para abrir o popup -->
+            <button onclick="document.getElementById('popupEntrada').style.display='flex'"
+                style="padding: 5px 10px; background: #9D6A5E; font-weight: bolder; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                +
+            </button>
+        
+            <!-- Modal -->
+            <div id="popupEntrada"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+                <div
+                    style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+        
+                    <!-- Cabeçalho -->
+                    <div
+                        style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span onclick="document.getElementById('popupEntrada').style.display='none'"
+                                style="font-size: 18px; cursor: pointer;">←</span>
+                            <span style="font-size: 18px; font-weight: 600; color: #344054;">Entrada de produto</span>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 400; color: #667085;">Faça o lançamento de entrada do produto
+                            selecionado</span>
+                    </div>
+        
+                    <!-- Inputs -->
+                    <input type="number" placeholder="Digite a quantidade de entrada"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+                    <input type="number" placeholder="Digite o valor unitário do produto"
+                        style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        
+                    <!-- Botão -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                        <button onclick="document.getElementById('popupEntrada').style.display='none'"
+                            style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div> Cappuccino</td>
+          <td>25</td>
+          <td>Und</td>
+          <td>R$ 3,25</td>
+          <td>R$ 81,25</td>
+          <td>R$ 81,25</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+
+</html>

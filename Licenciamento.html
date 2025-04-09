@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvorada</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+    * {
+      font-family: "Instrument Sans", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: Roboto, sans-serif;
+      background-color: #F6F6F6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    nav {
+      width: 150px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      box-sizing: border-box;
+    }
+
+    nav .nav-item a {
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #7D7D7D;
+      transition: 0.2s ease;
+    }
+
+    nav .nav-item a:hover {
+      background-color: #454545;
+      color: #fff;
+    }
+
+    nav img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .nav-item img {
+      width: 27px;
+      height: 27px;
+    }
+
+    .nav-item span {
+      color: #7D7D7D;
+      font-size: 16px;
+      font-family: Instrument Sans;
+    }
+
+    .nav-item:nth-child(3) img,
+    .nav-item:nth-child(4) img,
+    .nav-item:nth-child(5) img {
+      width: 23px;
+      height: 23px;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .greeting {
+      margin-bottom: 20px;
+    }
+
+    .greeting span,
+    .greeting strong {
+      font-size: 16px;
+      color: black;
+    }
+
+    .section-card {
+      background-color: white;
+      border-radius: 6px;
+      padding: 36px 20px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .section-card h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #667085;
+    }
+
+    .section-card p {
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      color: #667085;
+      font-weight: 300;
+    }
+
+    .tag {
+      background-color: rgba(240, 128, 25, 0.05);
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: inline-block;
+    }
+
+    .tag span {
+      color: #454545;
+      font-size: 14px;
+      font-family: Inter, sans-serif;
+    }
+
+    .filter-header {
+      width: 1189px;
+      height: 40px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .filter,
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn a{
+      color: white;
+      text-decoration: none;
+    }
+
+    .filter {
+      width: 177px;
+      background: white;
+      outline: 1px #D0D5DD solid;
+      justify-content: space-between;
+    }
+
+    .filter div:first-child {
+      color: #D0D5DD;
+      font-size: 14px;
+      font-family: Inter;
+      font-weight: 500;
+    }
+
+    .dropdown-icon {
+      width: 20px;
+      height: 20px;
+      position: relative;
+    }
+
+    .dropdown-icon div {
+      width: 8.33px;
+      height: 4.17px;
+      background: #1D1B20;
+      position: absolute;
+      left: 5.83px;
+      top: 8.33px;
+    }
+
+    .btn {
+      background: #9D6A5E;
+      outline: 1px solid #9D6A5E;
+    }
+
+    .btn div {
+      color: white;
+      font-size: 14px;
+      font-family: Inter;
+      font-weight: 500;
+    }
+
+    .table-header,
+    .table-row {
+      display: flex;
+      gap: 80px;
+      padding: 10px 0;
+      border-bottom: 1px solid #EAECF0;
+      color: #667085;
+    }
+
+    .table-header {
+      font-weight: bold;
+    }
+
+    .table-row div {
+      width: 220px;
+    }
+
+    .table-row div:nth-child(2) {
+      width: 120px;
+    }
+
+    .table-row div:nth-child(3),
+    .table-row div:nth-child(4) {
+      width: 200px;
+    }
+
+    .table-row div:nth-child(5) {
+      width: 170px;
+    }
+
+    .table-row div:nth-child(6) {
+      width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="Telainicial.html"><img src="Public/logoalvorada.png" alt="Logo Alvorada" /></a>
+    <div class="nav-item">
+      <img src="icons/pedidos.png" alt="Ícone Pedidos" />
+      <span><a href="pedidos.html">Pedidos</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/clientes.png" alt="Ícone Clientes" />
+      <span><a href="GestaoClientes.html">Clientes</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/estoque.png" alt="Ícone Estoque" />
+      <span><a href="estoque.html">Estoque</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/licenca.png" alt="Ícone Licenças" />
+      <span><a href="Licenciamento.html">Licenças</a></span>
+    </div>
+  </nav>
+
+
+  <main>
+    <div class="greeting">
+      <span>Olá,</span>
+      <strong> Gabriel Leme</strong>
+    </div>
+    <section class="section-card">
+      <h2>Gestão de Licenças</h2>
+      <p>Nesta área são relacionados as licenças e alvarás de funcionamento</p>
+      <div class="tag">
+        <span>10 Clientes</span>
+      </div>
+    </section>
+    <section>
+      <div class="section-card" style="margin-top: 10px; border: 0px solid #ccc;">
+        <div class="filter-header">
+          <div class="filter">
+            <div>Licença</div>
+            <div class="dropdown-icon">
+              <div></div>
+            </div>
+          </div>
+          <div class="filter">
+            <div>CNPJ</div>
+            <div class="dropdown-icon">
+              <div></div>
+            </div>
+          </div>
+          <div class="btn">
+            <div>Filtrar</div>
+          </div>
+          <div class="btn">
+            <div><a href="CadastroLicenca.html">Cadastrar</a></div>
+          </div>
+        </div>
+        <div class="table-header">
+          <div>Licença</div>
+          <div>Validade</div>
+          <div>Órgão</div>
+          <div>CNPJ</div>
+          <div>Notificação</div>
+          <div>Ações</div>
+        </div>
+        <!-- Repetir abaixo para cada linha -->
+        <div class="table-row">
+          <div>Alvará de funcionamento</div>
+          <div>15/12/2026</div>
+          <div>Prefeitura</div>
+          <div>42.933.516/0001-39</div>
+          <div>30,60,90,140 dias</div>
+          <div><img src="icons/download.png"></div>
+        </div>
+
+        <div class="table-row">
+          <div>Alvará de funcionamento</div>
+          <div>15/12/2026</div>
+          <div>Prefeitura</div>
+          <div>42.933.516/0001-39</div>
+          <div>30,60,90,140 dias</div>
+          <div><img src="icons/download.png"></div>
+        </div>
+
+        <div class="table-row">
+          <div>Alvará de funcionamento</div>
+          <div>15/12/2026</div>
+          <div>Prefeitura</div>
+          <div>42.933.516/0001-39</div>
+          <div>30,60,90,140 dias</div>
+          <div><img src="icons/download.png"></div>
+        </div>
+
+        <div class="table-row">
+          <div>Alvará de funcionamento</div>
+          <div>15/12/2026</div>
+          <div>Prefeitura</div>
+          <div>42.933.516/0001-39</div>
+          <div>30,60,90,140 dias</div>
+          <div><img src="icons/download.png"></div>
+        </div>
+
+        <div class="table-row">
+          <div>Alvará de funcionamento</div>
+          <div>15/12/2026</div>
+          <div>Prefeitura</div>
+          <div>42.933.516/0001-39</div>
+          <div>30,60,90,140 dias</div>
+          <div><img src="icons/download.png"></div>
+        </div>
+        <!-- Adicione mais .table-row conforme necessário -->
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

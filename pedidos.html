@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Acompanhamento de Pedidos</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+    * {
+      font-family: "Instrument Sans", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    /*teste*/
+
+    body {
+      margin: 0;
+      font-family: Roboto, sans-serif;
+      background-color: #F6F6F6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+
+    nav {
+      width: 150px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      box-sizing: border-box;
+    }
+
+    nav .nav-item a {
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #7D7D7D;
+      transition: 0.2s ease;
+    }
+
+    nav .nav-item a:hover {
+      background-color: #454545;
+      color: #fff;
+    }
+
+    nav img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .nav-item img {
+      width: 27px;
+      height: 27px;
+    }
+
+    .nav-item span {
+      color: #7D7D7D;
+      font-size: 16px;
+      font-family: Instrument Sans;
+    }
+
+    .nav-item:nth-child(3) img,
+    .nav-item:nth-child(4) img,
+    .nav-item:nth-child(5) img {
+      width: 23px;
+      height: 23px;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: #444;
+    }
+
+    .subtext {
+      color: #888;
+      font-size: 14px;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    select,
+    button {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      background-color: #9e7563;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .mesa {
+      background-color: #9e7563;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .pagination {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .pagination button {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      background-color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination .active {
+      background-color: #9e7563;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="Telainicial.html"><img src="Public/logoalvorada.png" alt="Logo Alvorada" /></a>
+    <div class="nav-item">
+      <img src="icons/pedidos.png" alt="Ícone Pedidos" />
+      <span><a href="pedidos.html">Pedidos</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/clientes.png" alt="Ícone Clientes" />
+      <span><a href="GestaoClientes.html">Clientes</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/estoque.png" alt="Ícone Estoque" />
+      <span><a href="estoque.html">Estoque</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/licenca.png" alt="Ícone Licenças" />
+      <span><a href="Licenciamento.html">Licenças</a></span>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="header">
+      <h2>Olá, <strong>Gabriel Leme</strong></h2>
+      <p class="subtext">Nesta área são relacionados os pedidos em andamento</p>
+    </div>
+
+    <div class="filter-bar">
+      <select>
+        <option>Nr. Pedido</option>
+      </select>
+      <select>
+        <option>Nome do cliente</option>
+      </select>
+      <select>
+        <option>Mesa</option>
+      </select>
+      <button class="btn">Filtrar</button>
+       <!-- Botão para abrir o popup -->
+    <button onclick="document.getElementById('popupPedido').style.display='flex'"
+    style="padding: 10px 20px; background: #9e7563; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Novo Pedido
+</button>
+
+<!-- Modal -->
+<div id="popupPedido"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+    <div
+        style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+
+        <!-- Cabeçalho -->
+        <div
+            style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span onclick="document.getElementById('popupPedido').style.display='none'"
+                    style="font-size: 18px; cursor: pointer;">←</span>
+                <span style="font-size: 18px; font-weight: 600; color: #344054;">Novo pedido</span>
+            </div>
+            <span style="font-size: 14px; font-weight: 400; color: #667085;">Realize um novo pedido</span>
+        </div>
+
+        <!-- Campo quantidade com estilo de tag -->
+        <div
+            style="background: white; border: 1px solid #D0D5DD; border-radius: 8px; padding: 8px 14px; font-size: 14px; color: #D0D5DD; font-weight: 500; width: fit-content;">
+            Quantidade de produtos
+        </div>
+
+        <!-- Inputs -->
+        <input type="text" placeholder="Produto"
+            style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        <input type="text" placeholder="Cliente"
+            style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        <input type="email" placeholder="E-mail"
+            style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        <input type="text" placeholder="Telefone"
+            style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+        <input type="text" placeholder="CPF"
+            style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+
+        <!-- Botão -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+            <button onclick="document.getElementById('popupPedido').style.display='none'"
+                style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                Salvar
+            </button>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <div class="cards">
+      <!-- Card Exemplo -->
+      <div class="card">
+        <p><strong>Pedido Nº 123456</strong></p>
+        <p>Café espresso .....................................................1und</p>
+        <p><strong>Cliente:</strong> Gabriel Leme<br>
+          <strong>E-mail:</strong> biel-leme@uni9.edu.br<br>
+          <strong>Telefone:</strong> (11) 99999-9999
+        </p>
+        <div class="mesa">Mesa 03</div>
+      </div>
+
+      <div class="card">
+        <p><strong>Pedido Nº 123456</strong></p>
+        <p>Capuccino .....................................................1und</p>
+        <p><strong>Cliente:</strong> Gabriel Leme<br>
+          <strong>E-mail:</strong> biel-leme@uni9.edu.br<br>
+          <strong>Telefone:</strong> (11) 99999-9999
+        </p>
+        <div class="mesa">Mesa 04</div>
+      </div>
+
+      <!-- Repetir outros cards conforme necessário -->
+    </div>
+
+    <div class="pagination">
+      <button>Anterior</button>
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>Próxima</button>
+    </div>
+  </div>
+</body>
+
+</html>

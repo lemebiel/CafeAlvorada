@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvorada</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+    * {
+      font-family: "Instrument Sans", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: Roboto, sans-serif;
+      background-color: #F6F6F6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    nav {
+      width: 150px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      box-sizing: border-box;
+    }
+
+    nav .nav-item a {
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #7D7D7D;
+      transition: 0.2s ease;
+    }
+
+    nav .nav-item a:hover {
+      background-color: #454545;
+      color: #fff;
+    }
+
+    nav img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .nav-item img {
+      width: 27px;
+      height: 27px;
+    }
+
+    .nav-item span {
+      color: #7D7D7D;
+      font-size: 16px;
+      font-family: Instrument Sans;
+    }
+
+    .nav-item:nth-child(3) img,
+    .nav-item:nth-child(4) img,
+    .nav-item:nth-child(5) img {
+      width: 23px;
+      height: 23px;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .greeting span,
+    .greeting strong {
+      font-size: 16px;
+      color: black;
+    }
+
+    section.container {
+      background-color: white;
+      border-radius: 6px;
+      padding: 36px 20px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .container h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #667085;
+    }
+
+    .container p {
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      color: #667085;
+      font-weight: 300;
+    }
+
+    .badge {
+      background-color: rgba(240, 128, 25, 0.05);
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: inline-block;
+    }
+
+    .badge span {
+      color: #454545;
+      font-size: 14px;
+      font-family: Inter, sans-serif;
+    }
+
+    .tabela {
+      background-color: white;
+      border-radius: 6px;
+      padding: 36px 20px 20px 20px;
+      box-sizing: border-box;
+      margin-top: 10px;
+      border: 0px solid #ccc;
+    }
+
+    .tabela-header,
+    .tabela-row {
+      display: flex;
+      gap: 80px;
+      padding: 10px 0;
+    }
+
+    .tabela-header {
+      font-weight: bold;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #EAECF0;
+      color: #667085;
+    }
+
+    .tabela-row {
+      border-bottom: 1px solid #EAECF0;
+      color: #667085;
+    }
+
+    .tabela-row div,
+    .tabela-header div {
+      width: 150px;
+    }
+
+    .tabela-header div:nth-child(2),
+    .tabela-row div:nth-child(2) {
+      width: 120px;
+    }
+
+    .tabela-header div:nth-child(3),
+    .tabela-row div:nth-child(3) {
+      width: 200px;
+    }
+
+    .tabela-header div:nth-child(4),
+    .tabela-row div:nth-child(4) {
+      width: 140px;
+    }
+
+    .tabela-header div:nth-child(5),
+    .tabela-row div:nth-child(5) {
+      width: 180px;
+    }
+
+    .tabela-header div:nth-child(6),
+    .tabela-row div:nth-child(6) {
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="Telainicial.html"><img src="Public/logoalvorada.png" alt="Logo Alvorada" /></a>
+    <div class="nav-item">
+      <img src="icons/pedidos.png" alt="Ícone Pedidos" />
+      <span><a href="pedidos.html">Pedidos</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/clientes.png" alt="Ícone Clientes" />
+      <span><a href="GestaoClientes.html">Clientes</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/estoque.png" alt="Ícone Estoque" />
+      <span><a href="estoque.html">Estoque</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/licenca.png" alt="Ícone Licenças" />
+      <span><a href="Licenciamento.html">Licenças</a></span>
+    </div>
+  </nav>
+
+  <main>
+    <div class="greeting">
+      <span>Olá,</span>
+      <strong> Gabriel Leme</strong>
+    </div>
+
+    <section class="container">
+      <h2>Gestão de clientes</h2>
+      <p>Nesta área são relacionados os clientes e a quantidade de pedidos / última compra</p>
+      <div class="badge">
+        <span>10 Clientes</span>
+      </div>
+      <!-- Botão para abrir o popup -->
+<button onclick="document.getElementById('popupCliente').style.display='flex'" style="margin: 40px; padding: 10px 20px; background: #9e7563; color: white; border: none; border-radius: 6px; cursor: pointer;">
+  Novo Cliente
+</button>
+
+<!-- Modal -->
+<div id="popupCliente" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 999;">
+  <div style="width: 655px; background: #F6F6F6; border-radius: 8px; padding: 32px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 16px;">
+
+    <!-- Cabeçalho -->
+    <div style="background: white; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span onclick="document.getElementById('popupCliente').style.display='none'" style="font-size: 18px; cursor: pointer;">←</span>
+        <span style="font-size: 18px; font-weight: 600; color: #344054;">Cadastro de cliente</span>
+      </div>
+      <span style="font-size: 14px; font-weight: 400; color: #667085;">Cadaste o cliente</span>
+    </div>
+
+    <!-- Inputs -->
+    <input type="text" placeholder="Digite o nome" style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+    <input type="email" placeholder="Digite o E-mail" style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+    <input type="text" placeholder="Digite o telefone" style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+    <input type="text" placeholder="Digite o CPF" style="padding: 10px 14px; font-size: 14px; border: 1px solid #D0D5DD; border-radius: 6px; background: white; color: #667085; outline: none;">
+
+    <!-- Botão -->
+    <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+      <button onclick="document.getElementById('popupCliente').style.display='none'" style="padding: 10px 24px; background: #9D6A5E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer;">
+        Salvar
+      </button>
+    </div>
+  </div>
+</div>
+    </section>
+
+    <section>
+      <div class="tabela">
+        <div class="tabela-header">
+          <div>Nome</div>
+          <div>CPF</div>
+          <div>E-mail</div>
+          <div>Telefone</div>
+          <div>Última Compra</div>
+          <div>Qtd Pedidos</div>
+        </div>
+
+        <!-- Repetição de linhas -->
+        <!-- Use um backend ou JS para popular dinamicamente -->
+        <div class="tabela-row">
+          <div>Gabriel Dantas</div>
+          <div>999.999.999-99</div>
+          <div>gabriel@email.com</div>
+          <div>(11) 99999-9999</div>
+          <div>01/04/2025</div>
+          <div>5</div>
+        </div>
+
+        <div class="tabela-row">
+          <div>Gabriel Dantas</div>
+          <div>999.999.999-99</div>
+          <div>gabriel@email.com</div>
+          <div>(11) 99999-9999</div>
+          <div>01/04/2025</div>
+          <div>5</div>
+        </div>
+
+        <div class="tabela-row">
+          <div>Gabriel Dantas</div>
+          <div>999.999.999-99</div>
+          <div>gabriel@email.com</div>
+          <div>(11) 99999-9999</div>
+          <div>01/04/2025</div>
+          <div>5</div>
+        </div>
+
+        <div class="tabela-row">
+          <div>Gabriel Dantas</div>
+          <div>999.999.999-99</div>
+          <div>gabriel@email.com</div>
+          <div>(11) 99999-9999</div>
+          <div>01/04/2025</div>
+          <div>5</div>
+        </div>
+
+        <div class="tabela-row">
+          <div>Gabriel Dantas</div>
+          <div>999.999.999-99</div>
+          <div>gabriel@email.com</div>
+          <div>(11) 99999-9999</div>
+          <div>01/04/2025</div>
+          <div>5</div>
+        </div>
+        <!-- Repetir conforme necessário -->
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvorada</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+    * {
+      font-family: "Instrument Sans", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: Roboto, sans-serif;
+      background-color: #F6F6F6;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    nav {
+      width: 150px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      box-sizing: border-box;
+    }
+
+    nav .nav-item a {
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #7D7D7D;
+      transition: 0.2s ease;
+    }
+
+    nav .nav-item a:hover {
+      background-color: #454545;
+      color: #fff;
+    }
+
+    nav img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .nav-item img {
+      width: 27px;
+      height: 27px;
+    }
+
+    .nav-item span {
+      color: #7D7D7D;
+      font-size: 16px;
+      font-family: Instrument Sans;
+    }
+
+    .nav-item:nth-child(3) img,
+    .nav-item:nth-child(4) img,
+    .nav-item:nth-child(5) img {
+      width: 23px;
+      height: 23px;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 6px;
+      padding: 36px 20px 20px 20px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #667085;
+    }
+
+    p {
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      color: #667085;
+      font-weight: 300;
+    }
+
+    .module-info {
+      background-color: rgba(240, 128, 25, 0.05);
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: inline-block;
+    }
+
+    .input-group {
+      align-self: stretch;
+      padding: 10px 20px;
+      background: white;
+      overflow: hidden;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .input-label {
+      color: #101828;
+      font-size: 14px;
+      font-family: Inter;
+      font-weight: 500;
+    }
+
+    .input-field {
+      width: 470px;
+      padding: 10px 16px;
+      background: white;
+      border-radius: 8px;
+      outline: 1px #D0D5DD solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #9D6A5E;
+      color: white;
+      font-size: 14px;
+      font-family: Inter;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cancel-button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: white;
+      border: 1px #D0D5DD solid;
+      color: #344054;
+      font-size: 14px;
+      font-family: Inter;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .notification-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 6px;
+      border: 1px #D0D5DD solid;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="Telainicial.html"><img src="Public/logoalvorada.png" alt="Logo Alvorada" /></a>
+    <div class="nav-item">
+      <img src="icons/pedidos.png" alt="Ícone Pedidos" />
+      <span><a href="pedidos.html">Pedidos</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/clientes.png" alt="Ícone Clientes" />
+      <span><a href="GestaoClientes.html">Clientes</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/estoque.png" alt="Ícone Estoque" />
+      <span><a href="estoque.html">Estoque</a></span>
+    </div>
+    <div class="nav-item">
+      <img src="icons/licenca.png" alt="Ícone Licenças" />
+      <span><a href="Licenciamento.html">Licenças</a></span>
+    </div>
+  </nav>
+
+  <main>
+    <div>
+      <span style="font-size: 16px; color: black;">Olá,</span>
+      <strong style="font-size: 16px; color: black;"> Gabriel Leme</strong>
+    </div>
+
+    <section>
+      <h2>Cadastro de licença</h2>
+      <p>Cadastre licenças para que sejam visualizadas</p>
+      <div class="module-info">
+        <span style="color: #454545; font-size: 14px; font-family: Inter, sans-serif;">4 Módulos</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="input-group">
+        <div class="input-label">Nome da licença</div>
+        <div class="input-field">
+          <div class="input-label">NOME DA LICENÇA</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Órgão responsável pelo licenciamento</div>
+        <div class="input-field">
+          <div class="input-label">NOME DO ÓRGÃO</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Data de validade da licença</div>
+        <div class="input-field">
+          <div class="input-label">DD/MM/AAAA</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Anexar documento</div>
+        <div class="input-field">
+          <div class="input-label">Anexe o arquivo</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Enviar notificação - prazo em dias antes da expiração</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="notification-option">
+            <div class="checkbox"></div>
+            <div>140 dias.</div>
+          </div>
+          <div class="notification-option">
+            <div class="checkbox"></div>
+            <div>90 dias.</div>
+          </div>
+          <div class="notification-option">
+            <div class="checkbox"></div>
+            <div>60 dias.</div>
+          </div>
+          <div class="notification-option">
+            <div class="checkbox"></div>
+            <div>30 dias.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div style="display: flex; justify-content: space-between;">
+          <div class="button">SALVAR</div>
+          <div class="cancel-button">Cancelar</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
