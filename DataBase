@@ -1,3 +1,5 @@
+--tabelas e valores do banco de dados + sugestóes de pesquisas
+
 -- Estrutura para tabela `clientes`
 CREATE TABLE `clientes` (
   `cliente_id` int(11) NOT NULL,
