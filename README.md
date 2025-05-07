@@ -14,3 +14,5 @@
 | Gislaine Yasmin Moreira da Silva         | 2223204113 | yasminmoreira495@uni9.edu.br   |
 
 ## Video do Front-End: https://youtu.be/Cwr79eFc-gE 
+
+## Video do Banco de Dados: https://youtu.be/UWsTpksnoyc
